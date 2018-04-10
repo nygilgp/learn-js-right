@@ -1,21 +1,21 @@
-var a = 10
+var a = 10;
 
-var js = 12
+var js = 12;
 
 
 
 
 function test() {
-  if (true) {
-    var x = 0;
+  let x = 1;
+  if (x ===true) {
+    
   }
 
   x += 1; // Default: 'x' used out of scope.
             // No warning when funcscope:true
 
-  return 
-  {
+  return {
     x: x,
     y: y 
-  }
+  };
 }
