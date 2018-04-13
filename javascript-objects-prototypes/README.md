@@ -203,18 +203,46 @@ console.log(dog.fullname);
 ```
 
 
-## JS Object 
-*   Using square brakets to access properties is also possible
+## JS Prototypes and Inheritance
+
+*   What is Prototype
+    - A prototype is an object that exsists in every function of JS
+    - Ptototype is an empty object
+    - An object prototype is different from a function prototype
 ```javascript
 'use strict';
-var dog = {
-    name: 'tiger',
-    color: 'balck & brown',
-    'eye color': 'gold'
-};
-console.log(dog['eye color']);
+var myFunc = function() {};
+console.log(myFunc.prototype); // {}
+
+var cat = { name: 'fluffy'};
+console.log(cat.__proto__); // Object {}
 ```
 
+* A function prototype is the object instance that will become the prototype for all the objects created using this function as constructor
+
+* An Object prototype is the object instance from which the object is inherited. 
+
+```javascript
+'use strict';
+
+function Cat(name, color) {
+    this.name = name;
+    this.color = color;
+}
+var fluffy = new Cat('fluffy', 'white');
+
+Cat.prototype.age = 3;
+
+console.log(Cat.prototype);
+console.log(fluffy.__proto__);
+
+var muffin = new Cat('muffin', 'brown');
+
+console.log(muffin.__proto__);
+
+console.log(Cat.prototype === fluffy.__proto__); // true
+
+```
 
 
 
