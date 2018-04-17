@@ -244,9 +244,58 @@ console.log(Cat.prototype === fluffy.__proto__); // true
 
 ```
 
-
-
-*   Using new keyword
+*   JS inheritance or Prototype chain
 ```javascript
+'use strict';
 
+function Animal(voice) {
+    this.voice = voice || 'Grunt';
+}
+Animal.prototype.speak = function() {
+    console.log(this.voice);
+}
+
+function Cat(name, color) {
+    Animal.call(this, 'Meow'); // make sure, any think that needs to be initalized in Animal when Cat is initialized will be taken care of
+    this.name = name;
+    this.color = color;
+}
+
+Cat.prototype = Object.create(Animal.prototype); // Object.create is only going to set Animal.prototype as Cat's prototype
+Cat.prototype.constructor = Cat; // the above statement will set Cat constructor name to Animal, so to avoid confusion when when we new out an object from Cat, we will set it back to Cat, without this statement fluffy.__proto__ will show instance of Animal 
+
+var fluffy = new Cat('fluffy', 'white');
+fluffy.speak();
+console.log(fluffy.__proto__)
+console.log(fluffy.__proto__.__proto__)
+```
+
+
+
+*   JS inheritance with class 
+```javascript
+'use strict';
+
+class Animal {
+    constructor(voice) {
+        this.voice = voice || 'Grunt';
+    }
+
+    speak() {
+        console.log(this.voice);
+    }
+}
+
+class Cat extends Animal {
+    constructor(name, color) {
+        super('Meow'); // make sure, any think that needs to be initalized in Animal when Cat is initialized will be taken care of
+        this.name = name;
+        this.color = color;
+    }
+}
+
+var fluffy = new Cat('fluffy', 'white');
+fluffy.speak();
+console.log(fluffy.__proto__)
+console.log(fluffy.__proto__.__proto__)
 ```
